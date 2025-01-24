@@ -41,6 +41,6 @@ npm run dev
 2. Descargar archivo
 3. Eliminar archivo
 
-## ** Pruebas**
+## **Pruebas**
 Usa Postman, cURL, o cualquier cliente HTTP para probar las rutas. Asegúrate de usar nombres de archivos válidos y verificar las respuestas del servidor.
 
