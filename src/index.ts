@@ -27,8 +27,8 @@ app.post('/upload', upload.single('file'), async (req: Request, res: Response) =
 
     const params = {
         Bucket: process.env.S3_BUCKET_NAME as string,
-        Key: req.file.originalname, // Nombre del archivo en S3
-        Body: req.file.buffer,      // Contenido del archivo
+        Key: req.file.originalname, 
+        Body: req.file.buffer,      
     };
 
     try {
@@ -52,6 +52,7 @@ app.get('/download/:filename', async (req: Request, res: Response) => {
     };
 
     try {
+        
         const fileStream = s3.getObject(params).createReadStream();
 
         res.attachment(filename);
@@ -59,6 +60,25 @@ app.get('/download/:filename', async (req: Request, res: Response) => {
     } catch (error) {
         console.error('Error al descargar el archivo:', error);
         res.status(500).send('Error al descargar el archivo.');
+    }
+});
+
+app.delete('/delete/:filename', async (req: Request, res: Response) => {
+    const { filename } = req.params;
+
+    const params = {
+        Bucket: process.env.S3_BUCKET_NAME as string,
+        Key: filename, // Nombre del archivo en S3
+    };
+
+    try {
+        await s3.deleteObject(params).promise();
+        res.status(200).json({
+            message: `Archivo '${filename}' eliminado exitosamente de S3`,
+        });
+    } catch (error) {
+        console.error('Error al eliminar el archivo:', error);
+        res.status(500).send('Error al eliminar el archivo de S3.');
     }
 });
 
