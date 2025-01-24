@@ -31,11 +31,11 @@ AWS_REGION=your-region
 S3_BUCKET_NAME=your-bucket-name
 ```
 
-## ** Uso **
+## **Uso**
 ```bash
 npm run dev
 ```
-## ** Rutas disponibles **
+## **Rutas disponibles**
 
 1. Subir archivo
 2. Descargar archivo
